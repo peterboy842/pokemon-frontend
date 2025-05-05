@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchPokemonByNumber } from "../services/pokemonService";
+import { fetchPokemonByNumber } from "../../services/pokemonService";
 
 export function Home() {
   const [pokedexNumber, setPokedexNumber] = useState("");
@@ -14,7 +14,7 @@ export function Home() {
       const data = await fetchPokemonByNumber(pokedexNumber);
       setPokemonData(data);
     } catch (error) {
-      alert("Pokémon não encontrado!");
+      alert("Pokémon not found");
       setPokemonData(null);
     }
   }
@@ -22,6 +22,7 @@ export function Home() {
   return (
     <div
       style={{
+        background: "gray",
         display: "flex",
         height: "100vh",
         alignItems: "center",
@@ -36,14 +37,14 @@ export function Home() {
           type="text"
           inputMode="numeric"
           pattern="[0-9]*"
-          placeholder="Digite o número da Pokédex"
+          placeholder="Type Pokédex number"
           value={pokedexNumber}
           onChange={handleInputChange}
           style={{ padding: 8 }}
         />
 
         <button onClick={handleSearch} style={{ padding: 8 }}>
-          Buscar
+          Search
         </button>
       </div>
 
