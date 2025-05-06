@@ -1,13 +1,17 @@
 const Footer = () => {
     return (
-        <footer style={{
-            backgroundColor: "red",
-            padding: "1rem",
-            textAlign: "center"
-        }}>
-            &#169; Pokémon
-        </footer>
-    )
-}
-
-export default Footer
+      <footer
+        style={{
+          backgroundColor: "#cc0000",
+          padding: "1rem",
+          textAlign: "center",
+          color: "white"
+        }}
+      >
+        Characters and Pokémon intellectual property belong to The Pokémon Company.
+      </footer>
+    );
+  };
+  
+  export default Footer;
+  
