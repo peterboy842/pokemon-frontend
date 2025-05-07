@@ -1,6 +1,29 @@
 import { useState } from "react";
 import { fetchPokemonByNumber } from "../../services/pokemonService";
 
+//Cores dos tipos de pokemon
+const typeColors: { [key: string]: string } = {
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD",
+};
+
+
 export function Home() {
   const [pokedexNumber, setPokedexNumber] = useState("");
   const [pokemonData, setPokemonData] = useState<any>(null);
@@ -47,7 +70,7 @@ export function Home() {
         />
 
         <button
-          onClick={() => handleSearch}
+          onClick={() => handleSearch()}
           style={{ padding: 8 }}>
           Search
         </button>
@@ -71,6 +94,28 @@ export function Home() {
             alt={pokemonData.name}
             style={{width: "200px", height: "auto"}}
           />
+          <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 10 }}>
+            {pokemonData.types.map((t: any) => {
+              const typeName = t.type.name;
+              const color = typeColors[typeName] || "#777";
+              return ( 
+                <span
+                  key={typeName}
+                  style={{
+                    backgroundColor: color,
+                    color: "white",
+                    padding: "6px 12px",
+                    borderRadius: "12px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  {typeName}
+                </span>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
