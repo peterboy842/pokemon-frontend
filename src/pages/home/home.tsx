@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { fetchPokemonByNumber } from "../../services/pokemonService";
 
-//Cores dos tipos de pokemon
 const typeColors: { [key: string]: string } = {
   normal: "#A8A77A",
   fire: "#EE8130",
@@ -22,7 +21,6 @@ const typeColors: { [key: string]: string } = {
   steel: "#B7B7CE",
   fairy: "#D685AD",
 };
-
 
 export function Home() {
   const [pokedexNumber, setPokedexNumber] = useState("");
@@ -51,10 +49,11 @@ export function Home() {
         alignItems: "center",
         justifyContent: "flex-start",
         flexDirection: "column",
-        paddingTop: 80
+        paddingTop: 80,
+        backgroundColor: "#dbeac2",
+        fontFamily: "'Arial', sans-serif"
       }}
     >
-
       <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
         <input
           type="text"
@@ -63,15 +62,13 @@ export function Home() {
           placeholder="Type Pokédex number"
           value={pokedexNumber}
           onChange={handleInputChange}
-          onKeyDown={(e) =>{
+          onKeyDown={(e) => {
             if (e.key === "Enter") handleSearch();
           }}
           style={{ padding: 8 }}
         />
 
-        <button
-          onClick={() => handleSearch()}
-          style={{ padding: 8 }}>
+        <button onClick={() => handleSearch()} style={{ padding: 8 }}>
           Search
         </button>
         <button
@@ -87,18 +84,29 @@ export function Home() {
       </div>
 
       {pokemonData && (
-        <div style={{ marginTop: 20, textAlign: "center" }}>
-          <h2>{pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)}</h2>
+        <div style={{ marginTop: 40, textAlign: "center" }}>
+          <h2>
+            {pokemonData.name.charAt(0).toUpperCase() +
+              pokemonData.name.slice(1)}
+          </h2>
           <img
             src={pokemonData.sprites.front_default}
             alt={pokemonData.name}
-            style={{width: "200px", height: "auto"}}
+            style={{ width: "200px", height: "auto" }}
           />
-          <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 10 }}>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 10,
+              marginTop: 10,
+            }}
+          >
             {pokemonData.types.map((t: any) => {
               const typeName = t.type.name;
               const color = typeColors[typeName] || "#777";
-              return ( 
+              return (
                 <span
                   key={typeName}
                   style={{
@@ -115,6 +123,52 @@ export function Home() {
                 </span>
               );
             })}
+          </div>
+
+          <div style={{ marginTop: 40, textAlign: "left" }}>
+            <h3 style={{ fontSize: "1.2rem", marginBottom: 24 }}>Status</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              {pokemonData.stats.map((stat: any) => {
+                const name = stat.stat.name.toUpperCase();
+                const value = stat.base_stat;
+                const percentage = (value / 255) * 100;
+
+                return (
+                  <div
+                    key={name}
+                    style={{ display: "flex", flexDirection: "column", gap: 8 }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        fontWeight: "bold",
+                        fontSize: "1rem",
+                      }}
+                    >
+                      <span>{name}</span>
+                      <span>{value}</span>
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: "#e0e0e0",
+                        borderRadius: 6,
+                        overflow: "hidden",
+                        height: 12,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: `${percentage}%`,
+                          backgroundColor: "#4caf50",
+                          height: "100%",
+                        }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
