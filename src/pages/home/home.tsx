@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetchPokemonByNumber } from "../../services/pokemonService";
+import { useNavigate } from "react-router-dom";
 
 const typeColors: { [key: string]: string } = {
   normal: "#A8A77A",
@@ -25,6 +26,7 @@ const typeColors: { [key: string]: string } = {
 export function Home() {
   const [pokedexNumber, setPokedexNumber] = useState("");
   const [pokemonData, setPokemonData] = useState<any>(null);
+  const navigate = useNavigate();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPokedexNumber(e.target.value);
@@ -51,9 +53,26 @@ export function Home() {
         flexDirection: "column",
         paddingTop: 80,
         backgroundColor: "#dbeac2",
-        fontFamily: "'Arial', sans-serif"
+        fontFamily: "'Arial', sans-serif",
       }}
     >
+      <div
+        style={{ display: "flex", gap: 30, marginTop: 20, marginBottom: 80 }}
+      >
+        <button onClick={() => navigate("/pagina1")} style={{ padding: 8 }}>
+          Kaio´s favorite Pokémon
+        </button>
+        <button onClick={() => navigate("/pagina2")} style={{ padding: 8 }}>
+          Pedro´s favorite Pokémon
+        </button>
+        <button onClick={() => navigate("/pagina3")} style={{ padding: 8 }}>
+          Hilton´s favorite Pokémon
+        </button>
+        <button onClick={() => navigate("/pagina4")} style={{ padding: 8 }}>
+          Wesley´s favorite Pokémon
+        </button>
+      </div>
+
       <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
         <input
           type="text"
