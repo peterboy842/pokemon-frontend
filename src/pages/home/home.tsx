@@ -47,13 +47,13 @@ export function Home() {
     <div
       style={{
         display: "flex",
-        height: "100vh",
+        minHeight: "100vh",
         alignItems: "center",
         justifyContent: "flex-start",
         flexDirection: "column",
         paddingTop: 80,
-        backgroundColor: "#dbeac2",
-        fontFamily: "'Arial', sans-serif",
+        paddingBottom: 80,
+        backgroundColor: "#dbeac2"
       }}
     >
       <div
