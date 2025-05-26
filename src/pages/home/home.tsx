@@ -111,7 +111,7 @@ export function Home() {
           <img
             src={pokemonData.sprites.front_default}
             alt={pokemonData.name}
-            style={{ width: "200px", height: "auto" }}
+            style={{ width: "200px", height: "200px" }}
           />
 
           <div
