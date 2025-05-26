@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchPokemonByNumber } from "../../services/pokemonService";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +27,12 @@ export function Home() {
   const [pokedexNumber, setPokedexNumber] = useState("");
   const [pokemonData, setPokemonData] = useState<any>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (pokemonData) {
+      console.log("Pokémon carregado:", pokemonData);
+    }
+  }, [pokemonData]);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPokedexNumber(e.target.value);
